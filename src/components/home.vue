@@ -132,17 +132,17 @@
 		</div>
 		<div :class="isFixed?'fixed navbox':'navbox'">
 			<ul class="navlist" v-draglist>	
-				<router-link tag="li" to="/home/recommend">推荐</router-link>
-				<router-link tag="li" to="/home/women">女装</router-link>
-				<router-link tag="li" to="/home/men">男装</router-link>
-				<router-link tag="li" to="/home/food">美食</router-link>
-				<router-link tag="li" to="/home/baby">母婴</router-link>
-				<router-link tag="li" to="/home/shoes">鞋子</router-link>
-				<router-link tag="li" to="/home/bra">内衣</router-link>
-				<router-link tag="li" to="/home/beauty">美妆</router-link>
-				<router-link tag="li" to="/home/sport">运动</router-link>
-				<router-link tag="li" to="/home/homepro">居家</router-link>
-				<router-link tag="li" to="/home/digital">数码</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/recommend">推荐</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/women">女装</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/men">男装</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/food">美食</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/baby">母婴</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/shoes">鞋子</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/bra">内衣</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/beauty">美妆</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/sport">运动</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/homepro">居家</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/home/digital">数码</router-link>
 			</ul>
 		</div>
 
@@ -470,7 +470,9 @@ import Vue from 'vue'
 		left:0;
 	}
 
-
+	.activeCss{
+		border-bottom:2px solid #ff464e;
+	}
 
 	
 
