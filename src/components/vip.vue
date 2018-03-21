@@ -1,6 +1,6 @@
 <template>
 	<div>
-		vip
+		vipaaaaaaaaa
 	</div>
 
 </template>
