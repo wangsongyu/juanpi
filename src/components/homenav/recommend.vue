@@ -40,7 +40,7 @@ import axios from 'axios'
 		li{
 			width:50%;
 		}
-	}
+	} 
 
 
 </style>
