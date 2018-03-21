@@ -74,7 +74,7 @@
 				<img :src="data.child[0].pic">
 			</li>
 		</ul>
-		<!-->++++++++<-->
+		
 		<div class="life">
 			<img :src="man">
 		</div>

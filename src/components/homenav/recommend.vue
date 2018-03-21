@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<ul class="homenav_list">
+		<ul class="homenav_list"
+		 v-infinite-scroll="loadMore"
+		 infinite-scroll-disabled="loading"
+		 infinite-scroll-distance="100"
+		 infinite-scroll-immediate-check=false
+		 >
 			<li class="homenav_li" v-for="data in datalist">
 				<img class="homenav_img" :src="data.pic_url" alt="">
 				<span class="homenav_price">{{data.priceList[0].text}}</span>
@@ -15,19 +20,42 @@
 <script type="text/javascript">
 
 import axios from 'axios'
+import { Indicator } from 'mint-ui'
 	
 	export default {
 		name:'recommend',
 		data(){
 			return{
-				datalist:[]
+				datalist:[],
+				loading:false,
+				current:1,
+				stop:''
 			}
 		},
 		mounted(){
+			Indicator.open('加载中...');
 			axios.get("/api/getGoods?page=1&zy_ids=p8_c4_l4_1456_1186_1220_1406_1184_1217_1371_5_128_106_51_18_1391&app_name=zhe&catname=xbsytj&flag=xbsytj").then(res=>{
-				console.log(res.data.data.goods)
+				// console.log(res.data.data.goods)
 				this.datalist=res.data.data.goods
 			})
+		},
+		methods:{
+
+			loadMore(){
+				if(this.stop=='1'){
+					Indicator.close()
+
+					return
+				}
+				this.current++;
+				axios.get(`/api/getGoods?page=${this.current}&zy_ids=p8_c4_l4_1456_1186_1220_1406_1184_1217_1371_5_128_106_51_18_1391&app_name=zhe&catname=newest_zhe`).then(res=>{
+					console.log(res.data.data)
+					 this.stop = res.data.data.has_more_page
+					 this.datalist=[...this.datalist,...res.data.data.goods]
+
+				})
+				
+			}
 		}
 	}
 
