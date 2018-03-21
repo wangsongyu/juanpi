@@ -1,10 +1,12 @@
 <template>
 	<div>
-		recommend
+		
 	</div>
 </template>
 
 <script type="text/javascript">
+
+import axios from 'axios'
 	
 	export default {
 		name:'recommend',
@@ -12,6 +14,11 @@
 			return{
 
 			}
+		},
+		mounted(){
+			axios.get("/api/getGoods?page=1&zy_ids=p8_c4_l4_1456_1186_1220_1406_1184_1217_1371_5_128_106_51_18_1391&app_name=zhe&catname=xbsytj&flag=xbsytj").then(res=>{
+				console.log(res.data);
+			})
 		}
 	}
 
