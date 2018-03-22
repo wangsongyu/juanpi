@@ -8,9 +8,9 @@
 				<span>个人中心</span>
 			</div>
 			<div class="login">
-				<a href="javascript:;">注册</a>
+				<router-link tag="a" to="/register">注册</router-link>
 				<span> | </span>
-				<a href="javascript:;">登陆</a>
+				<router-link tag="a" to="/login">登陆</router-link>
 			</div>
 		</header>
 		<div class="order">
@@ -30,24 +30,39 @@
 			</li>
 			<li>
 				<i class="iconfont icon-daichengtuan"></i><br>
-				<span>待付款</span>
+				<span>待成团</span>
 			</li>
 			<li>
 				<i class="iconfont icon-daishouhuo"></i><br>
-				<span>待付款</span>
+				<span>待收货</span>
 			</li>
 			<li>
 				<i class="iconfont icon-tuikuan"></i><br>
-				<span>待付款</span>
+				<span>退款/售后</span>
 			</li>
 		</ul>
 		
+		<ul class="mycard">
+			<li>我的优惠券</li>
+			<li>我的收藏</li>
+			<li>我的拼团</li>
+			<li>至尊会员卡<span class="tip">办理即享九折</span></li>
+			<li>我的免单券<span class="tip">0张</span></li>
+			<li>借钱<span class="tip">新用户免费领1000元</span></li>
+		</ul>
+		<ul class="server">
+			<li>客服中心</li>
+			<li>关于卷皮</li>
+		</ul>
 	</div>
-
+	<!-- <section>
+		<router-view></router-view>
+	</section> -->
 </template>
 
 
 <script type="text/javascript">
+
 	export default {
 		name:'my-juanpi',
 		data(){
@@ -116,7 +131,7 @@
 			border-bottom:1px solid #ccc;
 			display:flex;
 			justify-content:space-between;
-			height:100%;
+			height:49px;
 			.myorder{
 				width:20%;
 				font-size:15px;
@@ -150,6 +165,40 @@
 				margin-top:10px;
 				display:inline-block;
 			}
+		}
+	}
+	.mycard{
+
+		margin:10px 0;
+		padding:0 5%;
+		background:#fff;
+		li{
+			border-bottom:1px solid #ccc;
+			height:49px;
+			line-height:49px;
+			font-size:15px;
+			.tip{
+				float:right;
+				font-size:12px;
+				color:#999;
+			}
+		}
+		li:last-of-type{
+			border-bottom:0;
+		}
+	}
+	.server{
+		margin-bottom:65px;
+		padding:0 5%;
+		background:#fff;
+		li{
+			border-bottom:1px solid #ccc;
+			height:49px;
+			line-height:49px;
+			font-size:15px;
+		}
+		li:last-of-type{
+			border-bottom:0;
 		}
 	}
 

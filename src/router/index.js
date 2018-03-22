@@ -17,7 +17,10 @@ import Digital from '../components/homenav/digital.vue'
 import Vip from '../components/vip.vue'
 import Classify from '../components/classify.vue'
 import Cart from '../components/cart.vue'
+
 import Myjuanpi from '../components/my-juanpi.vue'
+import Register from '../components/register.vue'
+import Login from '../components/login.vue'
 
 Vue.use(Router)
 
@@ -91,6 +94,14 @@ export default new Router({
       path: "/my-juanpi",
       component:Myjuanpi
     },
+    {
+      path:"/register",
+      component:Register
+    },
+    {
+      path:"/login",
+      component:Login
+    }
 
   ]
 })
