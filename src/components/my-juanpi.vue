@@ -23,7 +23,7 @@
 				</div>
 			</div>
 		</div>
-		<ul class="editlist">
+		<ul class="editlist" @click="handleClick">
 			<li>
 				<i class="iconfont icon-daifukuan"></i><br>
 				<span>待付款</span>
@@ -68,6 +68,11 @@
 		data(){
 			return{
 				
+			}
+		},
+		methods:{
+			handleClick(){
+				console.log('这是myjuanpi页面',this.$route.params)
 			}
 		}
 	}

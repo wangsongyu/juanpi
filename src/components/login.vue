@@ -69,6 +69,7 @@
 <script type="text/javascript">
 import { Button } from 'mint-ui';
 import axios from 'axios'
+import router from '../router/index.js'
 	export default {
 		name:'login',
 		data(){
@@ -84,7 +85,9 @@ import axios from 'axios'
 		methods:{
 			handleClick(){
 				axios.post("/login",{phonenum:this.pn,password:this.pw}).then(res=>{
-					console.log(res.data);
+					if(res.data.status == 1){
+						router.push("/my-juanpi");
+					}
 				})
 				// console.log(this.pn,this.pw)
 			}

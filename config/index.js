@@ -28,6 +28,11 @@ module.exports = {
               target: 'http://localhost:3000',
               host: 'localhost:3000',
               changeOrigin:true
+          },
+           '/login':{
+              target: 'http://localhost:3000',
+              host: 'localhost:3000',
+              changeOrigin:true
           }
     },
 
