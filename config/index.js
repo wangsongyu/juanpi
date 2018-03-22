@@ -23,6 +23,11 @@ module.exports = {
               target: 'https://webservice.juanpi.com',
               host: 'webservice.juanpi.com',
               changeOrigin:true
+          },
+          '/register':{
+              target: 'http://localhost:3000',
+              host: 'localhost:3000',
+              changeOrigin:true
           }
     },
 
