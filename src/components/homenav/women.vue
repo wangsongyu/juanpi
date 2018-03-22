@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<ul class="homenav_list">
-			<li class="homenav_li" v-for="data in datalist">
+			<li class="homenav_li" v-for="data in datalist" @click="handClick(data.goods_id)">
 				<img class="homenav_img" :src="data.pic_url" alt="">
 				<span class="homenav_price">{{data.priceList[0].text}}</span>
 				<span class="homenav_allprice">￥{{data.oprice}}</span>
@@ -13,6 +13,7 @@
 
 <script type="text/javascript">
 import axios from 'axios'
+import router from '../../router/index.js'
 	export default {
 		name:'women',
 		data(){
@@ -25,6 +26,12 @@ import axios from 'axios'
 				console.log(res.data.data.goods);
 				this.datalist=res.data.data.goods;
 			})
+		},
+		methods:{
+			handClick(id){
+				router.push(`/detail/${id}`)
+			}
+
 		}
 	}
 

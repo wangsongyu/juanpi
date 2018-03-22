@@ -267,6 +267,9 @@ import Vue from 'vue'
 
 			window.addEventListener('scroll',this.handleScroll)
 		},
+		destroyed(){
+			window.removeEventListener('scroll',this.handleScroll)
+		},
 		components:{
 		    'swipe': Swipe,
 		    'swipe-item': SwipeItem

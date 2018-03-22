@@ -6,7 +6,7 @@
 		 infinite-scroll-distance="100"
 		 infinite-scroll-immediate-check=false
 		 >
-			<li class="homenav_li" v-for="data in datalist">
+			<li class="homenav_li" v-for="data in datalist" @click="handClick(data.goods_id)">
 				<img class="homenav_img" :src="data.pic_url" alt="">
 				<span class="homenav_price">{{data.priceList[0].text}}</span>
 				<span class="homenav_allprice">￥{{data.oprice}}</span>
@@ -21,7 +21,7 @@
 
 import axios from 'axios'
 import { Indicator } from 'mint-ui'
-	
+import router from '../../router/index.js'	
 	export default {
 		name:'recommend',
 		data(){
@@ -33,7 +33,6 @@ import { Indicator } from 'mint-ui'
 			}
 		},
 		mounted(){
-			Indicator.open('加载中...');
 			axios.get("/api/getGoods?page=1&zy_ids=p8_c4_l4_1456_1186_1220_1406_1184_1217_1371_5_128_106_51_18_1391&app_name=zhe&catname=xbsytj&flag=xbsytj").then(res=>{
 				// console.log(res.data.data.goods)
 				this.datalist=res.data.data.goods
@@ -55,6 +54,10 @@ import { Indicator } from 'mint-ui'
 
 				})
 				
+			},
+			
+			handClick(id){
+				router.push(`/detail/${id}`)
 			}
 		}
 	}

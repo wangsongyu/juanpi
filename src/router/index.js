@@ -15,9 +15,20 @@ import Homepro from '../components/homenav/homepro.vue'
 import Digital from '../components/homenav/digital.vue'
 
 import Vip from '../components/vip.vue'
+import baby from '../components/vipnav/baby.vue'
+import recommend from '../components/vipnav/recommend.vue'
+import beautiful from '../components/vipnav/beautiful.vue'
+import device from '../components/vipnav/device.vue'
+import food from '../components/vipnav/food.vue'
+import fruit from '../components/vipnav/fruit.vue'
+import milk from '../components/vipnav/milk.vue'
+import myhome from '../components/vipnav/myhome.vue'
+import paper from '../components/vipnav/paper.vue'
+import wine from '../components/vipnav/wine.vue'
+
 import Classify from '../components/classify.vue'
 import Cart from '../components/cart.vue'
-
+import Detail from '../components/detail.vue'
 import Myjuanpi from '../components/my-juanpi.vue'
 import Register from '../components/register.vue'
 import Login from '../components/login.vue'
@@ -80,7 +91,50 @@ export default new Router({
     },
      {
       path: "/vip",
-      component:Vip
+      redirect:'/vip/recommend',
+      component:Vip,
+      children:[
+        {
+          path:"recommend",
+          component:recommend
+        },
+        {
+          path:"baby",
+          component:baby
+        },
+        {
+          path:"beautiful",
+          component:beautiful
+        },
+        {
+          path:"device",
+          component:device
+        },
+        {
+          path:"food",
+          component:food
+        },
+        {
+          path:"fruit",
+          component:fruit
+        },
+        {
+          path:"milk",
+          component:milk
+        },
+        {
+          path:"myhome",
+          component:myhome
+        },
+        {
+          path:"paper",
+          component:paper
+        },
+        {
+          path:"wine",
+          component:wine
+        }
+      ]
     },
      {
       path: "/classify",
@@ -101,6 +155,14 @@ export default new Router({
     {
       path:"/login",
       component:Login
+    },
+    {
+      path:'/detail/:id',
+      component:Detail
+    },
+    {
+      path:'/',
+      redirect:"/home"
     }
 
   ]

@@ -11,6 +11,7 @@
 import footernav from './components/common/footer.vue'
 export default {
   name: 'App',
+  
   components:{
     footernav
 

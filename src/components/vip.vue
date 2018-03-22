@@ -29,16 +29,16 @@
 		</div>
 		<div class="navbox">
 			<ul class="navlist" v-draglist>	
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/recommend">推荐</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/paper">纸品</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/milk">牛奶</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/food">美食</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/baby">母婴</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/myhome">居家</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/wine">酒水</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/beautiful">美妆</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/device">电器</router-link>
-				<router-link tag="li" activeClass="activeCss" to="/vipnav/fruit">水果</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/recommend">推荐</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/paper">纸品</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/milk">牛奶</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/food">美食</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/baby">母婴</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/myhome">居家</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/wine">酒水</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/beautiful">美妆</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/device">电器</router-link>
+				<router-link tag="li" activeClass="activeCss" to="/vip/fruit">水果</router-link>
 			</ul>
 		</div>
 		<router-view></router-view>
@@ -63,8 +63,7 @@ import { Navbar, TabItem } from 'mint-ui';
 				con4:[],
 				con5:[],
 				rush:'',
-				good:'',
-				zonelist:[]
+				good:''
 			}
 		},
 		mounted(){
@@ -79,11 +78,6 @@ import { Navbar, TabItem } from 'mint-ui';
 				this.rush=this.datalist[5].data[0].child[0].pic
 				this.good=this.datalist[6].data[0].child[0].pic
 			})
-
-			axios.get('/api/getSupermarketGoods?cid=sumarket_sort&page=1&zhouyi_ids=p8_c4_l4_1456_1186_1220_1406_1184_1217_1371_5_128_106_51_18_1391&source=sumarket').then(res=>{
-				console.log(res.data.data.goods)
-				this.zonelist=res.data.data.goods 
-			})
 		},
 		components:{
 		    'swipe': Swipe,
@@ -96,7 +90,10 @@ import { Navbar, TabItem } from 'mint-ui';
 
 
 <style type="text/css" lang="scss" scoped>
-.all{height:2000px;}
+	
+	.all{
+		background:#eee;
+	}
 	.my-swipe {
 	  height:150px;
 	 	img{
@@ -140,6 +137,7 @@ import { Navbar, TabItem } from 'mint-ui';
 
 	}
 	.rush{
+		overflow:hidden;
 		width:100%;
 		display:flex;
 		height:80px;
@@ -148,9 +146,10 @@ import { Navbar, TabItem } from 'mint-ui';
 		}
 	}
 	.good{
+		margin-top:5px;
 		width:100%;
 		display:flex;
-		height:50px;
+		height:40px;
 		img{
 			width:100%;
 		}
@@ -158,7 +157,7 @@ import { Navbar, TabItem } from 'mint-ui';
 	.navbox{
 		width:100%;
 		height:40px;
-		background:#ff0;
+		background:#fff;
 		position:relative;
 		overflow:hidden;
 		.navlist{
