@@ -17,7 +17,7 @@
 
 		<ul class="prolist1">
 			<li v-for="data in prolist1">
-				<img :src="data.child[0].pic">
+				<img :src="data.child[0].pic" @click="handClick1">
 			</li>
 		</ul>
 		<ul class="prolist2">
@@ -43,7 +43,7 @@
 				<img :src="data.child[0].pic">
 			</li>
 		</ul>
-		<ul class="brand1">
+		<ul class="brand1 brand2">
 			<li v-for="data in brand3">
 				<img :src="data.child[0].pic">
 			</li>
@@ -160,6 +160,7 @@ require('vue-swipe/dist/vue-swipe.css');
 import { Swipe, SwipeItem } from 'vue-swipe';
 import { Navbar, TabItem } from 'mint-ui';
 import Vue from 'vue'
+import router from '../router/index.js'
 
  Vue.directive("draglist",{
  	inserted(el,binging,vnode){
@@ -285,6 +286,9 @@ import Vue from 'vue'
 		  			this.isFixed = false;
 		  		}
 		  		
+		  	},
+		  	handClick1(){
+		  		router.push('/yiyuan')
 		  	}
 		  }
 	}
@@ -297,7 +301,7 @@ import Vue from 'vue'
 		background:#f4f4f8;
 	}
 	.my-swipe {
-	  height: 200px;
+	  height: 150px;
 	 	img{
 	 		width:100%;
 	 		height:100%;
@@ -312,6 +316,7 @@ import Vue from 'vue'
 		}
 	}
 	.search{
+		background:#fff;
 		width:100%;
 		height:44px;
 		display:flex;
@@ -335,7 +340,6 @@ import Vue from 'vue'
 		height:80px;
 		width:100%;
 		display:flex;
-		border-bottom:1px solid #ccc;
 		li{
 			flex:1;
 			img{
@@ -348,7 +352,6 @@ import Vue from 'vue'
 		height:80px;
 		width:100%;
 		display:flex;
-		border-bottom:1px solid #ccc;
 		li{
 			flex:1;
 			img{
@@ -363,6 +366,7 @@ import Vue from 'vue'
 		}
 	}
 	.ad2{
+		background:#fff;
 		display:flex;
 		height:120px;
 		width:100%;
@@ -377,6 +381,7 @@ import Vue from 'vue'
 		width:100%;
 		height:60px;
 		display:flex;
+		border-bottom:1px solid #eee;
 		li{
 			flex:1;
 			img{
@@ -384,6 +389,9 @@ import Vue from 'vue'
 				height:100%;
 			}
 		}
+	}
+	.brand2{
+		border:0;
 	}
 	
 	.ad3{
@@ -405,7 +413,6 @@ import Vue from 'vue'
 		width:100%;
 		display:flex;
 		// padding-bottom:5px;
-		border-bottom:1px dotted #ccc;
 		li{
 			flex:1;
 			img{
@@ -432,7 +439,6 @@ import Vue from 'vue'
 		width:100%;
 		display:flex;
 		// padding-bottom:5px;
-		border-bottom:1px dotted #ccc;
 		li{
 			flex:1;
 			img{
@@ -449,7 +455,7 @@ import Vue from 'vue'
 	.navbox{
 		width:100%;
 		height:40px;
-		background:#ff0;
+		background:#fff;
 		position:relative;
 		overflow:hidden;
 		.navlist{

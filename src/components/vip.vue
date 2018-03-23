@@ -95,7 +95,7 @@ import { Navbar, TabItem } from 'mint-ui';
 		background:#eee;
 	}
 	.my-swipe {
-	  height:150px;
+	  height:145px;
 	 	img{
 	 		width:100%;
 			height:100%;
