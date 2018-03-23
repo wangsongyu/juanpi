@@ -3,7 +3,7 @@
 		<ul class="homenav_list"
 		 v-infinite-scroll="loadMore"
 		 infinite-scroll-disabled="loading"
-		 infinite-scroll-distance="100"
+		 infinite-scroll-distance="10"
 		 infinite-scroll-immediate-check=false
 		 >
 			<li class="homenav_li" v-for="data in datalist" @click="handClick(data.goods_id)">
@@ -14,6 +14,7 @@
 				<p class="homenav_vip">{{data.title}}</p>
 			</li>
 		</ul>
+		<div class="loadingText">{{loadingText}}</div>
 	</div>
 </template>
 
@@ -29,7 +30,8 @@ import router from '../../router/index.js'
 				datalist:[],
 				loading:false,
 				current:1,
-				stop:''
+				stop:'',
+				loadingText:'正在加载...'
 			}
 		},
 		mounted(){
@@ -43,7 +45,7 @@ import router from '../../router/index.js'
 			loadMore(){
 				if(this.stop=='1'){
 					Indicator.close()
-
+					this.loadingText = '没有更多的了...'
 					return
 				}
 				this.current++;
@@ -102,6 +104,12 @@ import router from '../../router/index.js'
 			}
 		}
 	} 
+	.loadingText{
+		height:100px;
+		width:100%;
+		background:#fff;
+		font-size:16px;
+	}
 
 
 </style>

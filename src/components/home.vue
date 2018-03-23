@@ -148,7 +148,7 @@
 
 		<router-view></router-view>
 
-		<div style="height:800px;width:100%;background:#f00;"></div>
+		
 	</div>
 
 </template>
