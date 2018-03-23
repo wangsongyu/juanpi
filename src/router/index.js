@@ -32,6 +32,7 @@ import Detail from '../components/detail.vue'
 import Myjuanpi from '../components/my-juanpi.vue'
 import Register from '../components/register.vue'
 import Login from '../components/login.vue'
+import Yiyuan from '../components/yiyuan.vue'
 
 Vue.use(Router)
 
@@ -42,7 +43,6 @@ export default new Router({
       path: "/home",
       component:Home,
       children:[
-
         {
           path:"recommend",
           component:Recommend
@@ -157,12 +157,16 @@ export default new Router({
       component:Login
     },
     {
+      path:'/yiyuan',
+      component:Yiyuan
+    },
+    {
       path:'/detail/:id',
       component:Detail
     },
     {
       path:'/',
-      redirect:"/home"
+      redirect:"/home/recommend"
     }
 
   ]
