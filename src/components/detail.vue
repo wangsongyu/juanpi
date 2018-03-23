@@ -20,7 +20,21 @@
 				<span class="viplogo">会员</span>
 				<span class="vipsport" v-vipsport="vipSport"></span>
 			</div>
-			<div class="down"></div>
+			<div class="down">
+				
+			</div>
+		</div>
+		
+		<div class="popup" v-show="isShow">
+			
+		</div>
+		<div class="foot" v-show="!isShow">
+			<ul>
+				<li><a href="">首页</a></li>
+				<li><a href="">购物车</a></li>
+				<li><a href="">立即购买</a></li>
+				<li><a href="javascript:;" @click="handclick">加入购物车</a></li>
+			</ul>
 		</div>
 
 	</div>	
@@ -41,7 +55,8 @@ import Vue from 'vue'
 				price:'',
 				title:'',
 				allbuy:'',
-				vipSport:''
+				vipSport:'',
+				isShow:false
 			}
 		},
 		components:{
@@ -66,6 +81,9 @@ import Vue from 'vue'
 			})
 		},
 		methods:{
+			handclick(){
+				this.isShow=!this.isShow
+			}
 
 		}
 		// ,
@@ -85,6 +103,7 @@ import Vue from 'vue'
 <style lang="scss" scoped>
 	.all{
 		background:#f4f4f8;
+		height:2000px;
 	}
 	.my-swipe {
 		position:relative;
@@ -172,6 +191,36 @@ import Vue from 'vue'
 			height:50%;background:salmon;
 		}
 		
+	}
+	.popup{
+		width:100%;
+		height:150px;
+		background:#0f0;
+		position:fixed;
+		bottom:0px;
+
+	}
+	.foot{
+		text-align:center;
+		width:100%;
+		height:50px;
+		line-height:50px;
+		background:#ff0;
+		position:fixed;
+		bottom:0;
+		left:0;
+		ul{
+			wdith:100%;
+			text-align:center;
+			li{
+				width:24%;
+				display:inline-block;
+				a{
+					display:block;
+					width:100%;
+				}
+			}
+		}
 	}
 
 </style>
