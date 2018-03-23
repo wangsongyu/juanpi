@@ -63,6 +63,7 @@
 
 <script type="text/javascript">
 
+
 	export default {
 		name:'my-juanpi',
 		data(){
@@ -72,7 +73,7 @@
 		},
 		methods:{
 			handleClick(){
-				console.log('这是myjuanpi页面',this.$route.params)
+				console.log('这是myjuanpi页面',this.$route.path)
 			}
 		}
 	}

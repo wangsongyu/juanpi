@@ -1,10 +1,12 @@
 <template>
   <div>
+
   	<section>
 		<router-view></router-view>
   	</section>
-    <footernav></footernav>
+    <footernav v-if="changeBoolean"></footernav>
   </div>
+
 </template>
 
 <script>
@@ -14,7 +16,11 @@ export default {
   
   components:{
     footernav
-
+  },
+  computed:{
+    changeBoolean(){
+      return this.$route.path !== this.$store.state.newpath
+    }
   }
 }
 </script>

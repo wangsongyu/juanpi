@@ -53,7 +53,8 @@ import Vue from 'vue'
 
 		},
 		mounted(){
-			console.log(this.$route.params)
+			console.log(this.$route.path);
+			this.$store.dispatch('changeNewpathAction',this.$route.path);
 			axios.get(`/api/getMemberAboutInfo?goods_id=${this.$route.params.id}&sa_id=15347379&is_pt_goods=0&req_coupons_id=${this.$route.params.id}`).then(res=>{
 				console.log(res);
 				this.headPic=res.data.skudata.info.goods_origin_url;
@@ -67,6 +68,10 @@ import Vue from 'vue'
 		methods:{
 
 		}
+		// ,
+		// beforeDestroy(){
+		// 	this.$store.dispatch('changeNewpathAction','111111');
+		// }
 	}
 
 	Vue.directive('vipsport',function(el,binding){
