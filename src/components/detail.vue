@@ -9,8 +9,7 @@
 		<div class="introduction">
 			<div class="up">
 				<span class="price"><i>￥</i>{{price}}</span>
-				<span class="vipPrice">会员价{{vipPrice}}</span>
-				<span class="free">包邮</span>
+				<span class="vipPrice">会员价￥{{vipPrice}}</span>
 				<span class="allbuy">{{allbuy}}</span>
 			</div>
 			<div class="down">{{title}}</div>
@@ -24,10 +23,35 @@
 				
 			</div>
 		</div>
-		
-		<div class="popup" v-show="isShow">
-			
-		</div>
+		<transition name="bounce">
+			<div class="popup" v-show="isShow">
+				<div class="con1">
+					<img class="shopPic" :src="shopPic">
+					<div class="choose">
+						<span>333</span>
+						<p>33333</p>
+					</div>
+					<span class="close" @click="handClose">X</span>
+				</div>
+				<div class="con2">
+					<h2 class="chooseColor">{{zav}}</h2>
+					<div class="fav">
+						<div class="box" v-for="data in chooselist">
+							<div class="up">{{data.av_zvalue}}</div>
+							<div class="down">{{data.stock_tips}}</div>
+						</div>
+					</div>
+					<h2 class="chooseFav">{{fav}}</h2>
+					<div v-color class="fav">
+						<div class="box" v-for="data in chooselist">
+							<div class="up">{{data.av_fvalue}}</div>
+							<div class="down">{{data.stock_tips}}</div>
+						</div>
+					</div>
+					<h2 class="chooseCount">购买数量</h2>
+				</div>
+			</div>
+		</transition>
 		<div class="foot" v-show="!isShow">
 			<ul>
 				<li><a href="">首页</a></li>
@@ -51,12 +75,17 @@ import Vue from 'vue'
 		data(){
 			return{
 				headPic:'',
+				shopPic:'',
 				vipPrice:'',
 				price:'',
 				title:'',
 				allbuy:'',
 				vipSport:'',
-				isShow:false
+				isShow:false,
+				fav:'',
+				zav:'',
+				chooselist:[]
+
 			}
 		},
 		components:{
@@ -73,15 +102,23 @@ import Vue from 'vue'
 			axios.get(`/api/getMemberAboutInfo?goods_id=${this.$route.params.id}&sa_id=15347379&is_pt_goods=0&req_coupons_id=${this.$route.params.id}`).then(res=>{
 				console.log(res);
 				this.headPic=res.data.skudata.info.goods_origin_url;
+				this.shopPic=res.data.skudata.info.goods_pic_url;
 				this.vipPrice=res.data.skudata.info.vprice;
 				this.price=res.data.skudata.info.sprice;
 				this.title=res.data.skudata.info.goods_title;
 				this.allbuy=res.data.skudata.info.join_number;
-				this.vipSport=res.data.discount.vip_info.content
+				this.vipSport=res.data.discount.vip_info.content;
+				this.fav=res.data.skudata.info.fav_name;
+				this.zav=res.data.skudata.info.zav_name;
+				this.chooselist=res.data.skudata.sku;
+				console.log(res.data.skudata.sku)
 			})
 		},
 		methods:{
 			handclick(){
+				this.isShow=!this.isShow
+			},
+			handClose(){
 				this.isShow=!this.isShow
 			}
 
@@ -96,6 +133,18 @@ import Vue from 'vue'
 		el.innerHTML=binding.value;
 	})
 
+	Vue.directive('color',function(el){
+		el.onclick=function(ev){
+			var target = ev.target;
+			var boxs =  document.getElementsByClassName('box');
+			// for(var i=0; i<boxs.length;i++){
+			// 	boxs[i].style.background = '';
+			// }
+			console.log(boxs)
+			target.style.background = 'yellow'
+
+		}
+	})
 
 
 </script>
@@ -126,8 +175,8 @@ import Vue from 'vue'
 	.introduction{
 		background:#fff;
 		height:60px;
-		width:90%;
-		padding:5%;
+		width:94%;
+		padding:3%;
 		.up{
 			display:flex;
 			align-items: center;
@@ -142,26 +191,20 @@ import Vue from 'vue'
 			}
 			.vipPrice{
 				display:inline-block;
-				width:60px;
+				width:80px;
+				text-align:center;
 				margin-left:5px;
 				padding:1px;
 				background:#2f3345;
 				color:#ffe8ab;
 			}
-			.free{
-				padding:1px;
-				margin-left:8px;
-				width:26px;
-				text-align:center;
-				background:#ff464e;
-				color:#fff;
-
-			}
 			.allbuy{
-				margin-left:110px;
+				color:#999;
+				margin-left:135px;
 			}
 		}
 		.down{
+			text-indent:3px;
 			margin-top:5px;
 			font-size:16px;
 		}
@@ -194,10 +237,71 @@ import Vue from 'vue'
 	}
 	.popup{
 		width:100%;
-		height:150px;
-		background:#0f0;
+		height:300px;
 		position:fixed;
 		bottom:0px;
+		.con1{
+			background:#fff;
+			width:100%;
+			height:70px;
+			position:relative;
+			.shopPic{
+				display:block;
+				width:100px;
+				height:100px;
+				position:absolute;
+				top:-40px;
+				left:15px;
+			}
+			.choose{
+				margin-left:130px;
+				width:100px;
+				height:40px;
+			}
+			.close{
+				position:absolute;
+				right:10px;
+				top:5px;
+				font-size:22px;
+				color:#bbb;
+			}
+		}
+		.con2{
+			padding:10px;
+			width:100%;
+			height:300px;
+			.chooseColor{
+				font-weight:100;
+			}
+			.chooseFav{
+				font-weight:100;
+			}
+			.chooseCount{
+				font-weight:100;
+			}
+			.fav{
+				padding:5px;
+				width:100%;
+				display:flex;
+				flex-wrap:wrap;
+				height:40px;
+				.box{
+					overflow:hidden;
+					margin-right:10px;
+					height:30px;
+					line-height:30px;
+					background:#fff;
+					color:#000;
+					width:28%;
+					border:1px solid #000;
+					text-align:center;
+					
+				}
+			}
+			.count{
+
+			}
+		}
 
 	}
 	.foot{
@@ -221,6 +325,22 @@ import Vue from 'vue'
 				}
 			}
 		}
+	}
+	.bounce-enter-active {
+	  animation: bounce-in .5s;
+	}
+	.bounce-leave-active {
+	  animation: bounce-in .5s reverse;
+	}
+	@keyframes bounce-in {
+	  0% {
+	    transform:translateY(100%);
+	    opacity: 0;
+	  }
+	  100% {
+	    transform:translateY(0px);
+	    opacity: 1;
+	  }
 	}
 
 </style>
