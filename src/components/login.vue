@@ -86,6 +86,7 @@ import router from '../router/index.js'
 			handleClick(){
 				axios.post("/login",{phonenum:this.pn,password:this.pw}).then(res=>{
 					if(res.data.status == 1){
+						console.log(res.data)
 						router.push("/my-juanpi");
 					}
 				})

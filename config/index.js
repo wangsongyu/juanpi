@@ -33,6 +33,11 @@ module.exports = {
               target: 'http://localhost:3000',
               host: 'localhost:3000',
               changeOrigin:true
+          },
+           '/addcart':{
+              target: 'http://localhost:3000',
+              host: 'localhost:3000',
+              changeOrigin:true
           }
     },
 

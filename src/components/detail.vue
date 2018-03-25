@@ -36,19 +36,30 @@
 				<div class="con2">
 					<h2 class="chooseColor">{{zav}}</h2>
 					<div class="fav">
-						<div class="box" v-for="data in chooselist">
-							<div class="up">{{data.av_zvalue}}</div>
-							<div class="down">{{data.stock_tips}}</div>
+						<div class="box" v-for="data in chooselist3" @click="changebg(data)" :class="{active:isActive == data}">
+							<div class="up">{{data}}</div>
+							<div class="down"></div>
 						</div>
 					</div>
 					<h2 class="chooseFav">{{fav}}</h2>
-					<div v-color class="fav">
-						<div class="box" v-for="data in chooselist">
-							<div class="up">{{data.av_fvalue}}</div>
-							<div class="down">{{data.stock_tips}}</div>
+					<div class="fav fav2">
+						<div class="box" v-for="data in chooselist2" @click="changebg2(data)" :class="{active:isActive2 == data}">
+							<div class="up">{{data}}</div>
+							<div class="down"></div>
 						</div>
 					</div>
-					<h2 class="chooseCount">购买数量</h2>
+					<h2 class="chooseCount">
+						<span>购买数量</span>
+						<ul>
+							<li @click="minusClick">-</li>
+							<li>{{payCount}}</li>
+							<li @click="addClick">+</li>
+						</ul>
+					</h2>
+					<div class="confirmBtn" @click="confirm">
+						确定
+					</div>
+
 				</div>
 			</div>
 		</transition>
@@ -84,7 +95,12 @@ import Vue from 'vue'
 				isShow:false,
 				fav:'',
 				zav:'',
-				chooselist:[]
+				chooselist:[],
+				chooselist2:[],
+				chooselist3:[],
+				isActive:'',
+				isActive2:'',
+				payCount:1
 
 			}
 		},
@@ -111,7 +127,17 @@ import Vue from 'vue'
 				this.fav=res.data.skudata.info.fav_name;
 				this.zav=res.data.skudata.info.zav_name;
 				this.chooselist=res.data.skudata.sku;
-				console.log(res.data.skudata.sku)
+				for(var i=0;i<this.chooselist.length;i++){
+					if(this.chooselist2.indexOf(this.chooselist[i].av_fvalue)===-1){
+						this.chooselist2.push(this.chooselist[i].av_fvalue);
+					}
+				}
+				for(var i=0;i<this.chooselist.length;i++){
+					if(this.chooselist3.indexOf(this.chooselist[i].av_zvalue)===-1){
+						this.chooselist3.push(this.chooselist[i].av_zvalue);
+					}
+				}
+				console.log(this.chooselist3)
 			})
 		},
 		methods:{
@@ -120,6 +146,24 @@ import Vue from 'vue'
 			},
 			handClose(){
 				this.isShow=!this.isShow
+			},
+			changebg(fvalue){
+				this.isActive = fvalue;
+				// console.log(this.isActive)
+			},
+			changebg2(fvalue){
+				this.isActive2 = fvalue;
+				// console.log(this.isActive)
+			},
+			minusClick(){
+				this.payCount--
+			},
+			addClick(){
+				this.payCount++
+			},
+			confirm(){
+				console.log(this.isActive,this.isActive2,this.payCount);
+				axios.post("/addcart",{goods_color:this.isActive,goods_size:this.isActive2,goods_count:this.payCount})
 			}
 
 		}
@@ -133,18 +177,7 @@ import Vue from 'vue'
 		el.innerHTML=binding.value;
 	})
 
-	Vue.directive('color',function(el){
-		el.onclick=function(ev){
-			var target = ev.target;
-			var boxs =  document.getElementsByClassName('box');
-			// for(var i=0; i<boxs.length;i++){
-			// 	boxs[i].style.background = '';
-			// }
-			console.log(boxs)
-			target.style.background = 'yellow'
 
-		}
-	})
 
 
 </script>
@@ -152,7 +185,13 @@ import Vue from 'vue'
 <style lang="scss" scoped>
 	.all{
 		background:#f4f4f8;
-		height:2000px;
+		// height:2000px;
+	}
+	.active{
+		background:#ff464e;
+		.up{
+			color:#fff;
+		}
 	}
 	.my-swipe {
 		position:relative;
@@ -237,20 +276,21 @@ import Vue from 'vue'
 	}
 	.popup{
 		width:100%;
-		height:300px;
+		height:60%;
 		position:fixed;
 		bottom:0px;
+		background:white;
 		.con1{
 			background:#fff;
 			width:100%;
-			height:70px;
+			// height:70px;
 			position:relative;
 			.shopPic{
 				display:block;
 				width:100px;
 				height:100px;
 				position:absolute;
-				top:-40px;
+				top:-50px;
 				left:15px;
 			}
 			.choose{
@@ -269,7 +309,7 @@ import Vue from 'vue'
 		.con2{
 			padding:10px;
 			width:100%;
-			height:300px;
+			// height:300px;
 			.chooseColor{
 				font-weight:100;
 			}
@@ -278,29 +318,52 @@ import Vue from 'vue'
 			}
 			.chooseCount{
 				font-weight:100;
+				display:flex;
+				margin-top:30px;
+				span{
+					width:70%;
+				}
+				ul{
+					display:flex;
+					width:30%;
+					li{
+						flex:1;
+						font-size:14px;
+					}
+				}
 			}
 			.fav{
 				padding:5px;
 				width:100%;
 				display:flex;
 				flex-wrap:wrap;
-				height:40px;
+				// height:40px;
 				.box{
 					overflow:hidden;
 					margin-right:10px;
 					height:30px;
 					line-height:30px;
-					background:#fff;
+					// background:#fff;
 					color:#000;
 					width:28%;
 					border:1px solid #000;
 					text-align:center;
-					
+					margin-top:10px;
 				}
 			}
-			.count{
-
+			.confirmBtn{
+				width:100%;
+				height:45px;
+				line-height:45px;
+				text-align:center;
+				color:white;
+				font-size:20px;
+				background:#ff464e;
+				position:absolute;
+				bottom:0;
+				left:0;
 			}
+			
 		}
 
 	}
